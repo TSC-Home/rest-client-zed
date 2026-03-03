@@ -15,7 +15,7 @@ use parser::HttpRequest;
 
 fn log_to_file(msg: &str) {
     use std::io::Write;
-    let path = std::env::temp_dir().join("zed-rest-lsp.log");
+    let path = std::env::temp_dir().join("rest-cli.log");
     if let Ok(mut f) = std::fs::OpenOptions::new().create(true).append(true).open(&path) {
         let _ = writeln!(f, "[rest-lsp] {msg}");
     }
@@ -197,10 +197,20 @@ impl LanguageServer for RestLsp {
                 if col >= m.start() && col <= m.end() {
                     let var_name = &cap[1];
                     let workspace_root = self.workspace_root.read().await;
-                    let env = workspace_root
-                        .as_ref()
-                        .map(|r| parser::load_env_files(r))
-                        .unwrap_or_default();
+                    let file_dir = uri
+                        .to_file_path()
+                        .ok()
+                        .and_then(|p| p.parent().map(|p| p.to_path_buf()));
+                    let env = match (&*workspace_root, &file_dir) {
+                        (Some(root), Some(fdir)) => parser::load_env_merged(root, fdir),
+                        (Some(root), None) => parser::load_env_files(root),
+                        (None, Some(fdir)) => {
+                            let root = parser::find_workspace_root(fdir)
+                                .unwrap_or_else(|| fdir.clone());
+                            parser::load_env_merged(&root, fdir)
+                        }
+                        (None, None) => Default::default(),
+                    };
 
                     let value = env
                         .get(var_name)
@@ -373,7 +383,7 @@ async fn main() {
     }
 
     // LSP mode (default)
-    let log_path = std::env::temp_dir().join("zed-rest-lsp.log");
+    let log_path = std::env::temp_dir().join("rest-cli.log");
     {
         use std::io::Write;
         if let Ok(mut f) = std::fs::File::create(&log_path) {

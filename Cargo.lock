@@ -954,6 +954,20 @@ dependencies = [
 ]
 
 [[package]]
+name = "rest-cli"
+version = "0.1.0"
+dependencies = [
+ "dotenvy",
+ "regex",
+ "reqwest",
+ "serde",
+ "serde_json",
+ "tokio",
+ "tower-lsp",
+ "url",
+]
+
+[[package]]
 name = "ring"
 version = "0.17.14"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1922,20 +1936,6 @@ name = "zed-rest"
 version = "0.1.0"
 dependencies = [
  "zed_extension_api",
-]
-
-[[package]]
-name = "zed-rest-lsp"
-version = "0.1.0"
-dependencies = [
- "dotenvy",
- "regex",
- "reqwest",
- "serde",
- "serde_json",
- "tokio",
- "tower-lsp",
- "url",
 ]
 
 [[package]]

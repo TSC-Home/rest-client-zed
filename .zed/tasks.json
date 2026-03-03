@@ -1,7 +1,7 @@
 [
   {
     "label": "Send HTTP Request",
-    "command": "zed-rest-lsp",
+    "command": "rest-cli",
     "args": ["--execute", "$ZED_FILE", "$ZED_ROW"],
     "tags": ["http-request"],
     "reveal": "always",
@@ -9,7 +9,7 @@
   },
   {
     "label": "HTTP: Run Named Request",
-    "command": "zed-rest-lsp",
+    "command": "rest-cli",
     "args": ["--pick", "$ZED_WORKTREE_ROOT"],
     "reveal": "always",
     "hide": "never"

@@ -29,7 +29,7 @@ cp languages/http/injections.scm "$ZED_EXT_DIR/languages/http/"
 cp languages/http/outline.scm "$ZED_EXT_DIR/languages/http/"
 
 # Copy native LSP binary
-cp target/release/zed-rest-lsp "$ZED_EXT_DIR/"
+cp target/release/rest-cli "$ZED_EXT_DIR/"
 
 echo ""
 echo "Installed to $ZED_EXT_DIR"

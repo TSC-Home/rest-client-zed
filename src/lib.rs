@@ -13,8 +13,8 @@ impl zed::Extension for RestExtension {
         worktree: &zed::Worktree,
     ) -> Result<zed::Command> {
         let path = worktree
-            .which("zed-rest-lsp")
-            .ok_or_else(|| "zed-rest-lsp not found in PATH. Install it with: cargo install --path lsp".to_string())?;
+            .which("rest-cli")
+            .ok_or_else(|| "rest-cli not found in PATH. Install it with: cargo install --path lsp".to_string())?;
 
         Ok(zed::Command {
             command: path,
