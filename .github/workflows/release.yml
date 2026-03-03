@@ -53,6 +53,7 @@ jobs:
           TARGET: ${{ matrix.target }}
 
       - name: Build
+        shell: bash
         run: cargo build --release --target "$TARGET" -p rest-cli
         env:
           TARGET: ${{ matrix.target }}
