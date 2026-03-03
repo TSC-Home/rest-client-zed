@@ -1,0 +1,16 @@
+[workspace]
+members = [".", "lsp"]
+resolver = "2"
+
+[package]
+name = "zed-rest"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[lib]
+path = "src/lib.rs"
+crate-type = ["cdylib"]
+
+[dependencies]
+zed_extension_api = "0.7"

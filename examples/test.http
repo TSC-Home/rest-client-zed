@@ -1,0 +1,25 @@
+# @name simple-get
+GET https://httpbin.org/get
+
+###
+
+# @name post-json
+POST https://httpbin.org/post
+Content-Type: application/json
+
+{
+  "name": "zed-rest",
+  "version": "0.1.0"
+}
+
+###
+
+# @name with-headers
+GET https://httpbin.org/headers
+Accept: application/json
+X-Custom-Header: hello-from-zed
+
+###
+
+# @name environment-variable
+GET https://{{HOST}}/get
